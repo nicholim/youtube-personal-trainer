@@ -58,7 +58,7 @@ def upload():
         user_out_path = filename[:-4]+"_opose.mp4"
         if(str(model)=="body"):
             user_npy_path_body = filename[:len(filename)-4]+"_body.npy"
-            # output_user_keypoints(user_video_path, user_npy_path_body, user_out_path, 0.2, model=str(model))
+            output_user_keypoints(user_video_path, user_npy_path_body, user_out_path, 0.2, model=str(model))
             out_h264 = convert_to_h264(user_out_path)
             rank_result = distance_using_dtw(str(model), user_npy_path_body)
             rank_result = dict(sorted(rank_result.items(), key=lambda x: x[1])[:10])
