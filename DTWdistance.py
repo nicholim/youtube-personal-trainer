@@ -105,7 +105,7 @@ def distance_using_dtw(model, seq1, seq2="all", varthresh=0.05, sigma=0.5):
         distSum = 0.0
 
         for dim in compareDimensions:
-            distance, path = fd.fastdtw(normCoordSequences1[dim], normCoordSequences2[dim], dist=euclidean)
+            distance, path = fd.fastdtw(normCoordSequences1[dim], normCoordSequences2[dim], dist=sqeuclidean)
             distSum += distance
             # print(distance)
         # print("NORMALIZED DISTANCE: "+ str(distSum))
