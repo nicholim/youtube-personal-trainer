@@ -49,7 +49,7 @@ def upload():
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], f.filename)
             f.save(file_path)
 
-            return render_template('web.html', filename=f.filename, model=[{'name':'body'}, {'name':'coco'}, {'name':'mpi'}])
+            return render_template('web.html', filename=f.filename, model=[{'name':'body'}, {'name':'coco'}, {'name':'mpii'}])
 
     elif request.form.get('analyze') == "Start Analyze":
         model=request.form.get('model_select')
@@ -65,14 +65,16 @@ def upload():
         elif(str(model)=="coco"):
             user_npy_path_coco = filename[:len(filename)-4]+"_coco.npy"
             output_user_keypoints(user_video_path, user_npy_path_coco, user_out_path, 0.2, model=str(model))
+            out_h264 = convert_to_h264(user_out_path)
             rank_result = distance_using_dtw(str(model), user_npy_path_coco)
             rank_result = dict(sorted(rank_result.items(), key=lambda x: x[1])[:10])
         else:
-            user_npy_path_mpi = filename[:len(filename)-4]+"_mpi.npy"
+            user_npy_path_mpi = filename[:len(filename)-4]+"_mpii.npy"
             output_user_keypoints(user_video_path, user_npy_path_mpi, user_out_path, 0.2, model=str(model))
+            out_h264 = convert_to_h264(user_out_path)
             rank_result = distance_using_dtw(str(model), user_npy_path_mpi)
             rank_result = dict(sorted(rank_result.items(), key=lambda x: x[1])[:10])
-        return render_template('web.html', filename=filename, vidanalyzed=out_h264, model=[{'name':'body'}, {'name':'coco'}, {'name':'mpi'}], analyzed=rank_result, links=links)
+        return render_template('web.html', filename=filename, vidanalyzed=out_h264, model=[{'name':'body'}, {'name':'coco'}, {'name':'mpii'}], analyzed=rank_result, links=links)
     else:
         return flash('No file selected for uploading')
 

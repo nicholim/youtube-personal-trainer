@@ -30,8 +30,8 @@ def output_user_keypoints(video_path, npy_path, out_path, threshold, model):
                     [5, 6], [6, 7], [8, 9], [9, 10], [12, 13], [11, 12], [14, 16], [15, 17]]
 
     else : 
-        protoFile = "/home/itsc/openpose-1.7.0/models/pose/mpi/pose_deploy_linevec_faster_4_stages.prototxt"
-        weightsFile = "/home/itsc/openpose-1.7.0/models/pose/mpi/pose_iter_160000.caffemodel"
+        proto_file = "/home/itsc/openpose-1.7.0/models/pose/mpi/pose_deploy_linevec_faster_4_stages.prototxt"
+        weights_file = "/home/itsc/openpose-1.7.0/models/pose/mpi/pose_iter_160000.caffemodel"
         BODY_PARTS = {0: "Head", 1: "Neck", 2: "RShoulder", 3: "RElbow", 4: "RWrist",
                     5: "LShoulder", 6: "LElbow", 7: "LWrist", 8: "RHip", 9: "RKnee",
                     10: "RAnkle", 11: "LHip", 12: "LKnee", 13: "LAnkle", 14: "Chest",
@@ -72,9 +72,9 @@ def output_user_keypoints(video_path, npy_path, out_path, threshold, model):
     zeros = None
 
     data = []
-    if (model == "MPII"):
+    if (model == "mpii"):
         previous_x, previous_y = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    elif (model == "COCO"):
+    elif (model == "coco"):
         previous_x, previous_y = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     else:
         previous_x, previous_y = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
